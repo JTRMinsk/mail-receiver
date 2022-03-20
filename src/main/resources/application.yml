@@ -7,12 +7,18 @@ logging:
 
 # Mail
 mail:
-  imap:
+  pop3:
     ssl: true
-    host: imap.gmail.com
-    port: 993
-    username: your-email%40gmail.com
-    password: your-password
+    host: pop.163.com
+    port: 995
+    username: jtrminsk%40163.com
+    password: AFEZWLDCHEVZXDIZ
+#  imap:
+#    ssl: true
+#    host: imap.qiye.aliyun.com
+#    port: 993
+#    username: jtrkiev%40aliyun.com
+#    password: JFK181235
 
 # Task execution
 spring:

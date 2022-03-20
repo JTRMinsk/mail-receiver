@@ -37,6 +37,16 @@ public class ReceiveMailServiceImpl implements ReceiveMailService {
             Arrays.asList(messages).stream().filter(message -> {
                 MimeMessage currentMessage = (MimeMessage) message;
                 try {
+                    log.info("Message ID : {}", ((MimeMessage) message).getMessageID());
+                    log.info("With subject: {}", message.getSubject());
+                    log.info("With content ID: {}", ((MimeMessage) message).getContentID());
+                    log.info("With message number: {}", message.getMessageNumber());
+                    //Request approve email must be sent
+                    //Approval email sender must be approver
+                    //Two emails must be in same line-- don't know how
+                    //No admin approve?
+                    //Title must be same
+                    //reply to all or just to support?
                     return currentMessage.getMessageID().equalsIgnoreCase(receivedMessage.getMessageID());
                 } catch (MessagingException e) {
                     log.error("Error occurred during process message", e);

@@ -37,14 +37,14 @@ public class MailReceiverConfiguration {
         receiveMailService.handleReceivedMail((MimeMessage) message.getPayload());
     }
 
-    @Bean("receiveEmailChannel")//1
+    @Bean("receiveEmailChannel")//2
     public DirectChannel defaultChannel() {
         DirectChannel directChannel = new DirectChannel();
         directChannel.setDatatypes(javax.mail.internet.MimeMessage.class);
         return directChannel;
     }
 
-    @Bean()//3
+    @Bean()//4
     @InboundChannelAdapter(
             channel = "receiveEmailChannel",
             poller = @Poller(fixedDelay = "5000", taskExecutor = "asyncTaskExecutor")
@@ -75,7 +75,7 @@ public class MailReceiverConfiguration {
 //        return imapMailReceiver;
 //    }
 
-    @Bean//2
+    @Bean//3
     public MailReceiver pop3MailReceiver(@Value("pop3://${mail.pop3.username}:${mail.pop3.password}@${mail.pop3.host}:${mail.pop3.port}/inbox") String storeUrl) {
         log.info("IMAP connection url: {}", storeUrl);
         Pop3MailReceiver pop3MailReceiver = new Pop3MailReceiver(storeUrl);

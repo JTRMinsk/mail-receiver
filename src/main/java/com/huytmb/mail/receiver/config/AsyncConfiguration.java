@@ -14,7 +14,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 @Configuration
-@EnableAsync
+@EnableAsync  //多线程的配置类， 类似extend Thread或者实现Runnable接口
+                //在别处使用@Async("asyncTaskExecutor") 就可以用同线程池的资源
 public class AsyncConfiguration implements AsyncConfigurer {
 
     private final Logger log = LoggerFactory.getLogger(AsyncConfiguration.class);
@@ -26,7 +27,7 @@ public class AsyncConfiguration implements AsyncConfigurer {
     }
 
     @Override
-    @Bean(name = "asyncTaskExecutor")//1
+    @Bean(name = "asyncTaskExecutor")//1, 用于生成异步线程池 async,异步
     public Executor getAsyncExecutor() {
         log.debug("Creating Async Task Executor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

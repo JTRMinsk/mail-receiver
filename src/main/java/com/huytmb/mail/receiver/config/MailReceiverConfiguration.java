@@ -11,7 +11,6 @@ import org.springframework.integration.annotation.Poller;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.config.EnableIntegration;
-import org.springframework.integration.mail.ImapMailReceiver;
 import org.springframework.integration.mail.MailReceiver;
 import org.springframework.integration.mail.MailReceivingMessageSource;
 import org.springframework.integration.mail.Pop3MailReceiver;
@@ -48,7 +47,7 @@ public class MailReceiverConfiguration {
     @InboundChannelAdapter(
             channel = "receiveEmailChannel",
             poller = @Poller(fixedDelay = "5000", taskExecutor = "asyncTaskExecutor")
-    )
+    )//Poller 轮询,轮流进入线程
     public MailReceivingMessageSource mailMessageSource(MailReceiver mailReceiver) {
         MailReceivingMessageSource mailReceivingMessageSource = new MailReceivingMessageSource(mailReceiver);
         return mailReceivingMessageSource;
